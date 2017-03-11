@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Bluetooth;
+using Android.Views;
 
 namespace uControlAndroid
 {
@@ -8,6 +10,7 @@ namespace uControlAndroid
     public class MainActivity : Activity
     {
         int count = 1;
+        Button button;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -18,9 +21,25 @@ namespace uControlAndroid
 
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.myButton);
+            button = FindViewById<Button>(Resource.Id.myButton);
+            button.Click += delegate { BLTConnect(); };
+            //button.Click += delegate { button.Text = $"{count++} clicks!"; };
+        }
 
-            button.Click += delegate { button.Text = $"{count++} clicks!"; };
+        private void BLTConnect()
+        {
+			BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
+			if (adapter == null)
+            {
+                button.Text = "adapter is not found";
+            }
+            if (!adapter.IsEnabled)
+            {
+				button.Text = "Bluetooth adapter is not enabled.";
+			}
+            if (adapter.IsEnabled) {
+                button.Text = adapter.Name;
+            }
         }
     }
 }
