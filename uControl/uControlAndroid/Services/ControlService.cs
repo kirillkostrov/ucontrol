@@ -1,14 +1,15 @@
 using System;
+using uControlAndroid.Entities;
 
-namespace uControlAndroid.Controls
+namespace uControlAndroid.Services
 {
-    public class ControlManager
+    public class ControlService
     {
         public void SaveControl(Control control)
         {
-            if(!control.Id.HasValue)
+            if(control.Id == 0)
             {
-                control.Id = Guid.NewGuid();
+                control.Id = 0;
             }
         }
 

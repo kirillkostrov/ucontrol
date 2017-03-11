@@ -1,51 +1,76 @@
 using SQLite;
+using System;
 using System.IO;
 using System.Linq;
-using uControlAndroid.Controls;
+using uControlAndroid.Entities;
 
 namespace uControlAndroid.Repository
 {
-    public class Database
+    public class Database: IDisposable
     {
         private const string _db = "UControl.db";
         private SQLiteConnection _connection = null;
 
+        public static void InitDatabase(string path)
+        {
+            using (var connection = GetConnection(path))
+            {
+                connection.CreateTable<GamePad>();
+                connection.CreateTable<Control>();                
+            }
+        }
+
         public Database(string path)
+        {
+            _connection = GetConnection(path);
+        }
+
+        private static SQLiteConnection GetConnection(string path)
         {
             string _dbpath = Path.Combine(path, _db);
 
-            _connection = new SQLiteConnection(_dbpath);
-            _connection.CreateTable<Control>();
-
+            return new SQLiteConnection(_dbpath);
         }
+
         ~Database()
         {
-            if (_connection != null)
-                _connection.Close();
+            Dispose();
         }
 
-        public int AddNewItem(Control item)
+        public void Dispose()
+        {
+            if (_connection != null)
+            {
+                _connection.Dispose();
+            }
+        }
+
+        public int Add<TEntity>(TEntity item)
+            where TEntity : new()
         {
             var result = _connection.Insert(item);
             return result;
         }
 
-        public int UpdateItem(Control item)
+        public int Update<TEntity>(TEntity item)
+            where TEntity : new()
         {
             var result = _connection.Update(item);
             return result;
         }
 
-        public int DeleteItem(Control item)
+        public int Delete<TEntity>(TEntity item)
+            where TEntity : new()
         {
             var result = _connection.Delete(item);
             return result;
         }
 
-        public IQueryable<Control> GetAllItems()
+        public IQueryable<TEntity> GetAllItems<TEntity>() 
+            where TEntity: new()
         {
-            var result = _connection.Table<Control>();
-            return result.AsQueryable<Control>();
+            var result = _connection.Table<TEntity>();
+            return result.AsQueryable<TEntity>();
         }
     }
 }
