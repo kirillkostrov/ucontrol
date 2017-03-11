@@ -36,6 +36,7 @@ namespace Andrule.Views
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.WheelLayout);
+            
 			progressBrake = 0;
 			progressRun = 0;
 

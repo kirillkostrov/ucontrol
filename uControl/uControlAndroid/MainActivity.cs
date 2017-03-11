@@ -28,22 +28,6 @@ namespace Andrule
                 var intent = new Intent(this, typeof(WheelActivity));
                 StartActivity(intent);
             };
-            //Tabs = TabHost;
-
-            //CreateTab(typeof(SetupActivity), "setup", "SETUP");
-            //CreateTab(typeof(WheelActivity), "wheel", "WHEEL");
         }
-
-   //     private void CreateTab(Type activityType, string tag, string label)
-   //     {
-   //         var intent = new Intent(this, activityType);
-   //         intent.AddFlags(ActivityFlags.NewTask);
-
-   //         var spec = Tabs.NewTabSpec(tag);
-			//spec.SetIndicator(label);
-   //         spec.SetContent(intent);
-
-   //         Tabs.AddTab(spec);
-   //     }
     }
 }

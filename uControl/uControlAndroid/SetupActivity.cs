@@ -9,6 +9,7 @@ using Android.Widget;
 using Andrule.Network;
 using Andrule.UIDetails;
 using uControlAndroid;
+using System.Threading;
 
 namespace Andrule.Views
 {
@@ -16,18 +17,15 @@ namespace Andrule.Views
     public class SetupActivity : Activity
     {
         private ISharedPreferences preferences;
-
-        private NetWorkHelper netWorkHelper;
         private EditText editIpText;
         private Button connectButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             
-            preferences = GetPreferences(FileCreationMode.Private);
-            netWorkHelper = new NetWorkHelper();
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SetupLayout);
+			preferences = GetPreferences(FileCreationMode.Private);
 
 			editIpText = FindViewById<EditText>(Resource.Id.editIpText);
 			connectButton = FindViewById<Button>(Resource.Id.connectButton);
@@ -35,6 +33,7 @@ namespace Andrule.Views
 
             var ipAddress = preferences.GetString("ipAddress", string.Empty);
             editIpText.Text = ipAddress;
+            var netWorkState = NetWorkHelper.IsConnected;
         }
 
         private void GetIpAndConnect(object sender, EventArgs e)
@@ -42,31 +41,30 @@ namespace Andrule.Views
             try
             {
                 var ipAddress = editIpText.Text;
+
                 var editor = preferences.Edit();
                 editor.PutString("ipAddress", ipAddress);
                 editor.Commit();
 
-                NetWorkHelper.Connect(ipAddress);
+                var intent = new Intent(this, typeof(NetworkService));
+                intent.PutExtra("ip", ipAddress);
+                StartService(intent);
+                Thread.Sleep(3000);
             }
-            catch (Exception ex)
-            {
-                UIHelper.ShowMessage("Connection error:" + ex.Message, this);
-                return;
+            catch(Exception ex){
+                UIHelper.ShowMessage(ex.Message, this);
             }
 
-            if (NetWorkHelper.IsConnected)
-            {
-                connectButton.Click -= GetIpAndConnect;
-                connectButton.Text = "Stop";
-                connectButton.Click += CloseConnection;
-                //MainActivity.Tabs.SetCurrentTabByTag("wheel");
-                UIHelper.ShowMessage("Connected", this);
-            }
+            if (NetWorkHelper.IsConnected) {
+				connectButton.Click -= GetIpAndConnect;
+				connectButton.Text = "Stop";
+			    connectButton.Click += CloseConnection;
+			}
         }
 
         private void CloseConnection(object sender, EventArgs e)
         {
-            netWorkHelper.CloseConnection();
+            StopService(new Intent(this, typeof(NetworkService)));
             connectButton.Click += GetIpAndConnect;
             connectButton.Click -= CloseConnection;
             connectButton.Text = "Connect";
@@ -75,7 +73,6 @@ namespace Andrule.Views
         public new void Dispose()
         {
             base.Dispose();
-            netWorkHelper.Dispose();
         }
     }
 }
