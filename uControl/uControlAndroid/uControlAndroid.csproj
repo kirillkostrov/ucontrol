@@ -67,11 +67,22 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetupActivity.cs" />
+    <Compile Include="WheelActivity.cs" />
+    <Compile Include="Accelerometer\Accelerometer.cs" />
+    <Compile Include="Accelerometer\AccelerometerListener.cs" />
+    <Compile Include="Network\NetWorkHelper.cs" />
+    <Compile Include="UIDetails\UIHelper.cs" />
+    <Compile Include="Views\Tabs\SetupActivity.cs" />
+    <Compile Include="Views\Tabs\SimulationListener.cs" />
+    <Compile Include="Views\Tabs\WheelActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <None Include="uControlAndroid.csproj" />
+    <None Include="Views\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -81,6 +92,38 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\layout\SetupLayout.axml" />
+    <AndroidResource Include="Resources\layout\WheelLayout.axml" />
+    <AndroidResource Include="Resources\drawable\arrowLeft.png" />
+    <AndroidResource Include="Resources\drawable\arrowRight.png" />
+    <AndroidResource Include="Resources\drawable\backgnd.png" />
+    <AndroidResource Include="Resources\drawable\backgroundBrake_fill.xml" />
+    <AndroidResource Include="Resources\drawable\backgroundRun_fill.xml" />
+    <AndroidResource Include="Resources\drawable\button_primary_selector.xml" />
+    <AndroidResource Include="Resources\drawable\calibrateActive.png" />
+    <AndroidResource Include="Resources\drawable\CalibrateButton.png" />
+    <AndroidResource Include="Resources\drawable\calibrateScale.png" />
+    <AndroidResource Include="Resources\drawable\calibrateScaleActiveLine.png" />
+    <AndroidResource Include="Resources\drawable\calibrateUnselected.png" />
+    <AndroidResource Include="Resources\drawable\connectButton.png" />
+    <AndroidResource Include="Resources\drawable\EditTextStyle.xml" />
+    <AndroidResource Include="Resources\drawable\greenStatus.png" />
+    <AndroidResource Include="Resources\drawable\ProgressBrake.xml" />
+    <AndroidResource Include="Resources\drawable\progressBrake_fill.xml" />
+    <AndroidResource Include="Resources\drawable\ProgressRun.xml" />
+    <AndroidResource Include="Resources\drawable\progressRun_fill.xml" />
+    <AndroidResource Include="Resources\drawable\redStatus.png" />
+    <AndroidResource Include="Resources\drawable\SeekProgressRun.xml" />
+    <AndroidResource Include="Resources\drawable\setupActive.png" />
+    <AndroidResource Include="Resources\drawable\setupUnselected.png" />
+    <AndroidResource Include="Resources\drawable\slider1.png" />
+    <AndroidResource Include="Resources\drawable\slider2.png" />
+    <AndroidResource Include="Resources\drawable\themeActive.png" />
+    <AndroidResource Include="Resources\drawable\themeUnselected.png" />
+    <AndroidResource Include="Resources\drawable\thumb.png" />
+    <AndroidResource Include="Resources\drawable\touchRoom.png" />
+    <AndroidResource Include="Resources\drawable\wheelActive.png" />
+    <AndroidResource Include="Resources\drawable\wheelUnselected.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

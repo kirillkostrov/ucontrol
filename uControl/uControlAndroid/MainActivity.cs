@@ -1,46 +1,40 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
+using Android.Content;
 using Android.Widget;
 using Android.OS;
-using Android.Bluetooth;
-using Android.Views;
+using Andrule.Views;
+using uControlAndroid;
 
-namespace uControlAndroid
+namespace Andrule
 {
-    [Activity(Label = "uControl", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : Activity
+    [Activity(Label = "Andrule", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
+    public class MainActivity : TabActivity
     {
-        int count = 1;
-        Button button;
+        public static TabHost Tabs { get; private set;}
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
+            base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            Tabs = TabHost;
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            button = FindViewById<Button>(Resource.Id.myButton);
-            button.Click += delegate { BLTConnect(); };
-            //button.Click += delegate { button.Text = $"{count++} clicks!"; };
+            CreateTab(typeof(SetupActivity), "setup", "SETUP");
+            CreateTab(typeof(WheelActivity), "wheel", "WHEEL");
         }
 
-        private void BLTConnect()
+        private void CreateTab(Type activityType, string tag, string label)
         {
-			BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
-			if (adapter == null)
-            {
-                button.Text = "adapter is not found";
-            }
-            if (!adapter.IsEnabled)
-            {
-				button.Text = "Bluetooth adapter is not enabled.";
-			}
-            if (adapter.IsEnabled) {
-                button.Text = adapter.Name;
-            }
+            var intent = new Intent(this, activityType);
+            intent.AddFlags(ActivityFlags.NewTask);
+
+            var spec = Tabs.NewTabSpec(tag);
+			spec.SetIndicator(label);
+            spec.SetContent(intent);
+
+            Tabs.AddTab(spec);
         }
     }
 }
+
 
