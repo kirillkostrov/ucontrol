@@ -64,6 +64,11 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvertService.cs" />
+    <Compile Include="BtGattBatteryService.cs" />
+    <Compile Include="BtGattDeviceInformationService.cs" />
+    <Compile Include="BootMouseReport.cs" />
+    <Compile Include="BtGattHIDService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
