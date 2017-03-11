@@ -91,15 +91,14 @@
     <Compile Include="Repository\Database.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetupActivity.cs" />
-    <Compile Include="WheelActivity.cs" />
     <Compile Include="Accelerometer\Accelerometer.cs" />
     <Compile Include="Accelerometer\AccelerometerListener.cs" />
     <Compile Include="Network\NetWorkHelper.cs" />
     <Compile Include="UIDetails\UIHelper.cs" />
-    <Compile Include="Views\Tabs\SetupActivity.cs" />
-    <Compile Include="Views\Tabs\SimulationListener.cs" />
-    <Compile Include="Views\Tabs\WheelActivity.cs" />
+    <Compile Include="SetupActivity.cs" />
+    <Compile Include="SimulationListener.cs" />
+    <Compile Include="WheelActivity.cs" />
+    <Compile Include="NetworkService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -150,6 +149,9 @@
     <AndroidResource Include="Resources\drawable\wheelActive.png" />
     <AndroidResource Include="Resources\drawable\wheelUnselected.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Views\Tabs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
