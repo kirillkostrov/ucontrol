@@ -1,7 +1,11 @@
+using System;
+
 namespace uControlAndroid.Controls
 {
     public class Control
     {
+        public Guid? Id { get; set; }
+
         public int YPos { get; set; }
 
         public int XPos { get; set; }
