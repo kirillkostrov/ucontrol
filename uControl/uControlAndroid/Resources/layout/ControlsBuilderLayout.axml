@@ -48,6 +48,10 @@
             android:id="@+id/gamepadNameInput"
             p3:visibility="gone"
             android:text="Name" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gamePadSpinner" />
     </Toolbar>
     <AbsoluteLayout
         android:minWidth="25px"

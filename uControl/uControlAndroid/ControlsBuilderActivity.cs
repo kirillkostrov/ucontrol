@@ -30,8 +30,9 @@ namespace uControlAndroid
 		Button controlToggleBtn;
         EditText gamepadNameInput;
 		View controlsArea;
+        Spinner gamePadSpinner;
 
-		GamePad[] gamePadsList;
+        GamePad[] gamePadsList;
         GamePad currentGamepad;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -48,6 +49,7 @@ namespace uControlAndroid
 			controlToggleBtn = FindViewById<Button>(Resource.Id.controlToggleBtn);
 			controlsArea = FindViewById<View>(Resource.Id.controlsArea);
             gamepadNameInput = FindViewById<EditText>(Resource.Id.gamepadNameInput);
+            gamePadSpinner = FindViewById<Spinner>(Resource.Id.gamePadSpinner);
 
             addGamepadBtn.Click += CreateNewGamepad;
             controlsArea.Drag += ButtonDragOnPlacement;
@@ -66,10 +68,20 @@ namespace uControlAndroid
 				((sender) as Button).StartDrag(data, new View.DragShadowBuilder(((sender) as Button)), null, 0);
 			};
 
+            showGamepadsListBtn.Click += ShowGamePads;
+
             showGamepadsListBtn.Visibility = ViewStates.Visible;
             gamepadNameInput.Visibility = ViewStates.Gone;
             ToggleControlsButtons(ViewStates.Gone);
 
+            UpdateSpinnerAdapter();
+        }
+
+        private void UpdateSpinnerAdapter()
+        {
+            var items = gamePadsList.Select(x => x.Name).ToArray();
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, items);
+            gamePadSpinner.Adapter = adapter;
         }
 
 		private void ButtonDragOnPlacement(object sender, View.DragEventArgs e)
@@ -103,7 +115,7 @@ namespace uControlAndroid
             addGamepadBtn.Text = "Save";
             addGamepadBtn.Click -= CreateNewGamepad;
             addGamepadBtn.Click += SaveNewGamepad;
-			ToggleControlsButtons(ViewStates.Visible);
+			ToggleControlsButtons(ViewStates.Visible);            
         }
 
 		private void SaveNewGamepad(object sender, EventArgs e)
@@ -112,7 +124,9 @@ namespace uControlAndroid
 			currentGamepad = gamepadService.SaveGamePad(currentGamepad);
             gamePadsList = gamepadService.GetGamePadList();
 
-			addGamepadBtn.Text = "+ Create";
+            UpdateSpinnerAdapter();
+
+            addGamepadBtn.Text = "+ Create";
 			addGamepadBtn.Click -= SaveNewGamepad;
 			addGamepadBtn.Click += CreateNewGamepad;
 
@@ -139,6 +153,22 @@ namespace uControlAndroid
             controlButtonBtn.Visibility = state;
             controlStickBtn.Visibility = state;
             controlToggleBtn.Visibility = state;
+        }
+
+        private void ShowGamePads(object sender, EventArgs e)
+        {
+            var posX = ((sender) as Button).GetX();
+            var posY = ((sender) as Button).GetY();
+
+            foreach(var gamePad in gamePadsList)
+            {
+                var button = new Button(this)
+                {
+                    Text = gamePad.Name
+                };
+                var layout = new LinearLayout(this);
+                layout.AddView(button);
+            }
         }
     }
 }
