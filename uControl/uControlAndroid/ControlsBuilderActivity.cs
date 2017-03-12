@@ -78,6 +78,11 @@ namespace uControlAndroid
             var items = gamePadsList.Select(x => x.Name).ToArray();
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, items);
             gamePadSpinner.Adapter = adapter;
+
+            if(items.Length == 0)
+            {
+                gamePadSpinner.Visibility = ViewStates.Gone;
+            }
         }
 
 		private void ButtonDragOnPlacement(object sender, View.DragEventArgs e)
