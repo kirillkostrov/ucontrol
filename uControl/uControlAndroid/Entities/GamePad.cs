@@ -9,5 +9,10 @@ namespace uControlAndroid.Entities
         public string Name { get; set; }
 
         public Control[] Controls { get; set; }
+
+        public GamePad()
+        {
+            Controls = new Control[0];
+        }
     }
 }

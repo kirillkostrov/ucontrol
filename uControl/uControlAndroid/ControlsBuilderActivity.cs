@@ -16,7 +16,9 @@ using uControlAndroid.Services;
 
 namespace uControlAndroid
 {
-	[Activity(Label = "ControlsBuilderActivity", Theme = "@android:style/Theme.NoTitleBar")]
+    [Activity(Label = "Andrule",
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,
+              Theme = "@android:style/Theme.NoTitleBar")]
     public class ControlsBuilderActivity : Activity
     {
         GamePadService gamepadService;
@@ -64,6 +66,10 @@ namespace uControlAndroid
 				((sender) as Button).StartDrag(data, new View.DragShadowBuilder(((sender) as Button)), null, 0);
 			};
 
+            showGamepadsListBtn.Visibility = ViewStates.Visible;
+            gamepadNameInput.Visibility = ViewStates.Gone;
+            ToggleControlsButtons(ViewStates.Gone);
+
         }
 
 		private void ButtonDragOnPlacement(object sender, View.DragEventArgs e)
@@ -78,10 +84,10 @@ namespace uControlAndroid
 
 				case DragAction.Drop:
 					e.Handled = true;
-
+                    var button = ((sender) as Button);
                     var typeInString = e.Event.ClipData.GetItemAt(0).Text;
-                    var posX = e.Event.GetX();
-                    var posY = e.Event.GetY();
+                    var posX = evt.GetX();
+                    var posY = evt.GetY();
                     CreateNewControl(typeInString, posX, posY);
 					break;
 			}
