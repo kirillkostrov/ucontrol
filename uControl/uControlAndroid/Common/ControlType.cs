@@ -2,8 +2,8 @@ namespace uControlAndroid.Common
 {
     public enum ControlType
     {
-        ActionButton,
-        Stick,
-        Toggle,
+        ActionButton = 1,
+        Stick = 2,
+        Toggle = 3,
     }
 }
