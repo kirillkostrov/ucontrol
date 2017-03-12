@@ -58,6 +58,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -65,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ControlType.cs" />
+    <Compile Include="Common\ListItem.cs" />
     <Compile Include="Entities\Control.cs" />
     <Compile Include="Entities\GamePad.cs" />
     <Compile Include="MainActivity.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Accelerometer\Accelerometer.cs" />
     <Compile Include="Accelerometer\AccelerometerListener.cs" />
     <Compile Include="Network\NetWorkHelper.cs" />
+    <Compile Include="Services\SetupService.cs" />
     <Compile Include="UIDetails\UIHelper.cs" />
     <Compile Include="SetupActivity.cs" />
     <Compile Include="SimulationListener.cs" />
@@ -80,6 +85,7 @@
     <Compile Include="NetworkService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
