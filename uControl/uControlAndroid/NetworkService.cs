@@ -7,6 +7,7 @@ using Android.OS;
 using Andrule.Network;
 using Andrule.UIDetails;
 using Android.Util;
+using Andrule.Views;
 
 namespace uControlAndroid
 {

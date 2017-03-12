@@ -49,17 +49,14 @@ namespace Andrule.Views
                 var intent = new Intent(this, typeof(NetworkService));
                 intent.PutExtra("ip", ipAddress);
                 StartService(intent);
-                Thread.Sleep(3000);
             }
             catch(Exception ex){
                 UIHelper.ShowMessage(ex.Message, this);
             }
-
-            if (NetWorkHelper.IsConnected) {
-				connectButton.Click -= GetIpAndConnect;
-				connectButton.Text = "Stop";
-			    connectButton.Click += CloseConnection;
-			}
+            Thread.Sleep(3000);
+			connectButton.Click -= GetIpAndConnect;
+			connectButton.Text = "Stop";
+			connectButton.Click += CloseConnection;
         }
 
         private void CloseConnection(object sender, EventArgs e)
