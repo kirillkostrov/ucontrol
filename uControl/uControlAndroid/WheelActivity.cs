@@ -88,13 +88,15 @@ namespace Andrule.Views
         private uint GetButtonStatecPacked()
         {
             uint result = 0;
+
             for (var i = 0; i < 32; i++)
             {
                 if (_buttonStates[i])
                 {
-                    result |= (uint)(2 ^ i);
+                    result |= (uint)(2 ^ (i + 1));
                 }
             }
+
             return result;
         }
 
