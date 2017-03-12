@@ -1,4 +1,4 @@
-namespace uControlAndroid.Controls
+namespace uControlAndroid.Common
 {
     public enum ControlType
     {
