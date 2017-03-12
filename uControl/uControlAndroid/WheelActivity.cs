@@ -25,10 +25,7 @@ namespace Andrule.Views
 		private int progressBrake;
 		private int progressRun;
 
-		private int _button01Clicked;
-		private int _button02Clicked;
-		private int _button03Clicked;
-		private int _button04Clicked;
+        private bool[] _buttonStates;
 
         private const bool invertThrottleAxis = true;
 
@@ -48,28 +45,27 @@ namespace Andrule.Views
 			var _seekBarRun = FindViewById<SeekBar> (Resource.Id.seekBarRun);
 			_seekBarRun.ProgressChanged += seekBarRunProgressChanged;
 
-			Button button01 = FindViewById<Button>(Resource.Id.Button01);
-			button01.Click += delegate { _button01Clicked = 1; };
+            _buttonStates = new bool[32];
 
-			Button button02 = FindViewById<Button>(Resource.Id.Button02);
-			button02.Click += delegate { _button02Clicked = 1; };
+            Button button01 = FindViewById<Button>(Resource.Id.Button01);
+            button01.Click += delegate { _buttonStates[0] = true; };
 
-			Button button03 = FindViewById<Button>(Resource.Id.Button03);
-			button03.Click += delegate { _button03Clicked = 1; };
+            Button button02 = FindViewById<Button>(Resource.Id.Button02);
+            button02.Click += delegate { _buttonStates[1] = true; };
 
-			Button button04 = FindViewById<Button>(Resource.Id.Button04);
-			button04.Click += delegate { _button04Clicked = 1; };
+            Button button03 = FindViewById<Button>(Resource.Id.Button03);
+            button03.Click += delegate { _buttonStates[2] = true; };
+
+            Button button04 = FindViewById<Button>(Resource.Id.Button04);
+            button04.Click += delegate { _buttonStates[3] = true; };
         }
 
         public bool OnUpdateAccelerometer(Accelerometer.Accelerometer accelerometer)
         {
             try
             {
-				NetWorkHelper.Send(string.Format("^{0}|{1}|{2}|{3}|{4}|{5}|{6}$", accelerometer.Rotation, progressBrake, progressRun, _button01Clicked, _button02Clicked, _button03Clicked, _button04Clicked));
-				_button01Clicked = 0;
-				_button02Clicked = 0;
-				_button03Clicked = 0;
-				_button04Clicked = 0;
+                NetWorkHelper.Send(string.Format("^{0}|{1}|{2}|{3}$", accelerometer.Rotation, progressBrake, progressRun, GetButtonStatecPacked()));
+                ClearButtonStates();
             }
             catch (SocketException ex)
             {
@@ -87,6 +83,27 @@ namespace Andrule.Views
             }
             
             return NetWorkHelper.IsConnected;
+        }
+
+        private uint GetButtonStatecPacked()
+        {
+            uint result = 0;
+            for (var i = 0; i < 32; i++)
+            {
+                if (_buttonStates[i])
+                {
+                    result |= (uint)(2 ^ i);
+                }
+            }
+            return result;
+        }
+
+        private void ClearButtonStates()
+        {
+            for (var i = 0; i < 32; i++)
+            {
+                _buttonStates[i] = false;
+            }
         }
 
         protected override void OnResume()
