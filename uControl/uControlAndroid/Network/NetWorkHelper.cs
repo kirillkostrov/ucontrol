@@ -21,14 +21,8 @@ namespace Andrule.Network
             try
             {
                 _client = new UdpClient();
-                
-                if (string.IsNullOrEmpty(ip)) {
-                    // KK's address
-                    ip = "192.168.34.146";
-                    //ip = "192.168.137.1";
-                }
-
                 _client.Connect(ip, 51515);
+ 
                 currentIp = ip;
                 IsConnected = true;
                 ReconnectCounter = 0;

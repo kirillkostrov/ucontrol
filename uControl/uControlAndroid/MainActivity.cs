@@ -38,10 +38,6 @@ namespace Andrule
 
             Database.InitDatabase(ConnectionPath);
             //CreateDatabase();
-            //Tabs = TabHost;
-
-            //CreateTab(typeof(SetupActivity), "setup", "SETUP");
-            //CreateTab(typeof(WheelActivity), "wheel", "WHEEL");
         }
 
         private void CreateDatabase()
@@ -60,16 +56,5 @@ namespace Andrule
             }
         }
 
-   //     private void CreateTab(Type activityType, string tag, string label)
-   //     {
-   //         var intent = new Intent(this, activityType);
-   //         intent.AddFlags(ActivityFlags.NewTask);
-
-   //         var spec = Tabs.NewTabSpec(tag);
-			//spec.SetIndicator(label);
-   //         spec.SetContent(intent);
-
-   //         Tabs.AddTab(spec);
-   //     }
     }
 }
