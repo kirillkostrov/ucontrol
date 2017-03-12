@@ -13,7 +13,9 @@ using System.Threading;
 
 namespace Andrule.Views
 {
-    [Activity]
+    [Activity(Label = "Andrule",
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,
+              Theme = "@android:style/Theme.NoTitleBar")]
     public class SetupActivity : Activity
     {
         private ISharedPreferences preferences;

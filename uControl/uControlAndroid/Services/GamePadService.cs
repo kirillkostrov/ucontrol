@@ -62,33 +62,6 @@ namespace uControlAndroid.Services
             return CustomGamePads.Values.ToArray();
         }
 
-        public int CreateOrUpdateGamePad(ListItem gamePad)
-        {
-            var gamePadId = gamePad.Id;
-            if (gamePadId > 0)
-            {
-                CustomGamePads[gamePad.Id].Name = gamePad.Name;
-            }
-            else
-            {
-                gamePadId = CustomGamePads.Count > 0
-                ? CustomGamePads.Max(x => x.Key) + 1
-                : 1;
-                var newGamePad = new GamePad
-                {
-                    Id = gamePadId,
-                    Name = gamePad.Name,
-                    Controls = new Control[0],
-                };
-
-                CustomGamePads.Add(gamePadId, newGamePad);
-            }
-            
-            SaveChanges();
-
-            return gamePadId;
-        }
-
         public void DeleteGamePad(int id)
         {
             CustomGamePads.Remove(id);

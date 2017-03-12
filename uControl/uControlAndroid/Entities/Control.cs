@@ -6,9 +6,9 @@ namespace uControlAndroid.Entities
     {
         public int Id { get; set; }
 
-        public int YPos { get; set; }
+        public float YPos { get; set; }
 
-        public int XPos { get; set; }
+        public float XPos { get; set; }
 
         public int Height { get; set; }
 

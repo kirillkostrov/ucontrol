@@ -17,8 +17,10 @@ using uControlAndroid;
 
 namespace Andrule.Views
 {
-    [Activity]
-	public class WheelActivity : Activity
+    [Activity(Label = "Andrule",
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,
+              Theme = "@android:style/Theme.NoTitleBar")]
+    public class WheelActivity : Activity
     {
         private AccelerometerListener _accelerometerListener;
 

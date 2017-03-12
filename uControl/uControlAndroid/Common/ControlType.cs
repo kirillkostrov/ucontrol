@@ -2,10 +2,8 @@ namespace uControlAndroid.Common
 {
     public enum ControlType
     {
-        ActionButton,
-        DPad,
-        Trigger,
-        Slider,
-        Accelerometer
+        ActionButton = 1,
+        Stick = 2,
+        Toggle = 3,
     }
 }
