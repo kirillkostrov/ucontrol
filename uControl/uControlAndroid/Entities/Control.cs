@@ -15,7 +15,5 @@ namespace uControlAndroid.Entities
         public int Weight { get; set; }
 
         public ControlType ControlType { get; set;}
-
-        public int GamePadId { get; set; }
     }
 }

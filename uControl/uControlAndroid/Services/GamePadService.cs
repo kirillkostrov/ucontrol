@@ -1,4 +1,3 @@
-using Android.Content;
 using uControlAndroid.Entities;
 using System.IO;
 using Newtonsoft.Json;
@@ -17,7 +16,7 @@ namespace uControlAndroid.Services
         public GamePadService()
         {
             var fileName = "setupDb.json";
-            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
+            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             FilePath = Path.Combine(documentsPath, fileName);
 
             if (File.Exists(FilePath))
@@ -37,13 +36,30 @@ namespace uControlAndroid.Services
             File.WriteAllText(FilePath, json);
         }
 
-        public ListItem[] GetGamePadList()
+        public GamePad SaveGamePad(GamePad gamePad)
         {
-            return CustomGamePads.Select(x => new ListItem
+            var gamePadId = gamePad.Id;
+            if (gamePadId > 0)
             {
-                Id = x.Key,
-                Name = x.Value.Name
-            }).ToArray();
+                CustomGamePads[gamePad.Id] = gamePad;
+            }
+            else
+            {
+                gamePad.Id = CustomGamePads.Count > 0
+                ? CustomGamePads.Max(x => x.Key) + 1
+                : 1;
+
+                CustomGamePads.Add(gamePadId, gamePad);
+            }
+
+            SaveChanges();
+
+            return gamePad;
+        }
+
+        public GamePad[] GetGamePadList()
+        {
+            return CustomGamePads.Values.ToArray();
         }
 
         public int CreateOrUpdateGamePad(ListItem gamePad)
@@ -84,9 +100,9 @@ namespace uControlAndroid.Services
             return CustomGamePads[gamePadId].Controls;
         }
 
-        public int CreateOrUpdateControl(Control control)
+        public int CreateOrUpdateControl(int gamePadId, Control control)
         {
-            var controls = GetGamePadControls(control.GamePadId).ToDictionary(x => x.Id);
+            var controls = GetGamePadControls(gamePadId).ToDictionary(x => x.Id);
 
             if (control.Id > 0)
             {
@@ -101,7 +117,7 @@ namespace uControlAndroid.Services
                 controls.Add(nextId, control);
             }
 
-            CustomGamePads[control.GamePadId].Controls = controls.Values.ToArray();
+            CustomGamePads[gamePadId].Controls = controls.Values.ToArray();
 
             SaveChanges();
 
