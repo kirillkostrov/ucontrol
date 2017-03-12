@@ -24,7 +24,6 @@ namespace uControlAndroid
         GamePadService gamepadService;
 
         Button addGamepadBtn;
-        Button showGamepadsListBtn;
         Button controlButtonBtn;
 		Button controlStickBtn;
 		Button controlToggleBtn;
@@ -43,7 +42,6 @@ namespace uControlAndroid
             gamePadsList = gamepadService.GetGamePadList();
 
             addGamepadBtn = FindViewById<Button>(Resource.Id.addGamepadBtn);
-            showGamepadsListBtn = FindViewById<Button>(Resource.Id.showGamepadsListBtn);
             controlButtonBtn = FindViewById<Button>(Resource.Id.controlButtonBtn);
 		    controlStickBtn = FindViewById<Button>(Resource.Id.controlStickBtn);
 			controlToggleBtn = FindViewById<Button>(Resource.Id.controlToggleBtn);
@@ -68,9 +66,7 @@ namespace uControlAndroid
 				((sender) as Button).StartDrag(data, new View.DragShadowBuilder(((sender) as Button)), null, 0);
 			};
 
-            showGamepadsListBtn.Click += ShowGamePads;
-
-            showGamepadsListBtn.Visibility = ViewStates.Visible;
+            gamePadSpinner.Visibility = ViewStates.Visible;
             gamepadNameInput.Visibility = ViewStates.Gone;
             ToggleControlsButtons(ViewStates.Gone);
 
@@ -109,7 +105,7 @@ namespace uControlAndroid
         {
             currentGamepad = new GamePad();
 
-            showGamepadsListBtn.Visibility = ViewStates.Gone;
+            gamePadSpinner.Visibility = ViewStates.Gone;
             gamepadNameInput.Visibility = ViewStates.Visible;
             gamepadNameInput.Text = "NewGamepad";
             addGamepadBtn.Text = "Save";
@@ -130,7 +126,7 @@ namespace uControlAndroid
 			addGamepadBtn.Click -= SaveNewGamepad;
 			addGamepadBtn.Click += CreateNewGamepad;
 
-            showGamepadsListBtn.Visibility = ViewStates.Visible;
+            gamePadSpinner.Visibility = ViewStates.Visible;
             gamepadNameInput.Visibility = ViewStates.Gone;
             ToggleControlsButtons(ViewStates.Gone);
         }

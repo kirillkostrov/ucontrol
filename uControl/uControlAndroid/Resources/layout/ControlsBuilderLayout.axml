@@ -16,11 +16,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/addGamepadBtn" />
         <Button
-            android:text="My gamepads"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/showGamepadsListBtn" />
-        <Button
             android:text="Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
