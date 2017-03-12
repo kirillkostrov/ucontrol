@@ -17,7 +17,7 @@ using uControlAndroid;
 
 namespace Andrule.Views
 {
-    [Activity]
+	[Activity(Theme = "@android:style/Theme.NoTitleBar")]
 	public class WheelActivity : Activity
     {
         private AccelerometerListener _accelerometerListener;

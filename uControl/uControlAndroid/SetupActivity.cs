@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace Andrule.Views
 {
-    [Activity]
+	[Activity(Theme = "@android:style/Theme.NoTitleBar")]
     public class SetupActivity : Activity
     {
         private ISharedPreferences preferences;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Toolbar xmlns:p3="http://schemas.android.com/tools"
+        android:background="?android:attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar1"
+        p3:visibility="visible"
+        android:layout_marginRight="0.0dp">
+        <Button
+            android:text="+ gamepad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addGamepadBtn" />
+        <Button
+            android:text="My gamepads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/showGamepadsListBtn" />
+        <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/controlButtonBtn"
+            android:backgroundTint="#ffef5350"
+            android:visibility="visible"
+            p3:visibility="gone" />
+        <Button
+            android:text="Stick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/controlStickBtn"
+            android:backgroundTint="#ff7e57c2"
+            p3:visibility="gone" />
+        <Button
+            android:text="Toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/controlToggleBtn"
+            android:backgroundTint="#ff66bb6a"
+            p3:visibility="gone" />
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/gamepadNameInput"
+            p3:visibility="gone"
+            android:text="Name" />
+    </Toolbar>
+    <AbsoluteLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/controlsArea" />
+</LinearLayout>

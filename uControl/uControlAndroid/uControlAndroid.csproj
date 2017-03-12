@@ -75,6 +75,7 @@
     <Compile Include="SimulationListener.cs" />
     <Compile Include="WheelActivity.cs" />
     <Compile Include="NetworkService.cs" />
+    <Compile Include="ControlsBuilderActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -123,6 +124,7 @@
     <AndroidResource Include="Resources\drawable\touchRoom.png" />
     <AndroidResource Include="Resources\drawable\wheelActive.png" />
     <AndroidResource Include="Resources\drawable\wheelUnselected.png" />
+    <AndroidResource Include="Resources\layout\ControlsBuilderLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

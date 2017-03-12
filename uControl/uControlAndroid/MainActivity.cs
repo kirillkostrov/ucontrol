@@ -8,7 +8,10 @@ using Andrule.Views;
 
 namespace Andrule
 {
-    [Activity(Label = "Andrule", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
+	[Activity(Label = "Andrule", 
+              MainLauncher = true, 
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape, 
+              Theme = "@android:style/Theme.NoTitleBar")]
     public class MainActivity : Activity
     {
         public static TabHost Tabs { get; private set;}
@@ -28,6 +31,13 @@ namespace Andrule
                 var intent = new Intent(this, typeof(WheelActivity));
                 StartActivity(intent);
             };
+
+            var builderBtn = FindViewById(Resource.Id.openCustomBtn);
+			builderBtn.Click += delegate
+			{
+                var intent = new Intent(this, typeof(ControlsBuilderActivity));
+				StartActivity(intent);
+			};
         }
     }
 }
